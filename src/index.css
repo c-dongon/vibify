@@ -1,0 +1,106 @@
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Oxygen;
+  background: linear-gradient(to top,#141414, #545454); 
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.headerbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 5px;
+}
+
+.headerbox .header {
+  text-shadow: 0px 0px 10px black;
+  color: white;
+  font-size: 4rem;
+
+}
+
+.headerbox .logo {
+  background: no-repeat;
+  background-image: url("./public/assets/spotifylogo.png");
+  height: 70px;
+  width: 70px;
+  background-size: cover;
+  background-position: center;
+  margin-left: 20px;
+}
+
+.authbutton {
+  margin-top: 20px;
+  text-align: center;
+  background-color: #1db954;
+  border-radius: 30px;
+  color: #191414;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: white solid 2px;
+  padding: 10px;
+}
+
+.authbutton a:hover{
+  color: white;
+  text-shadow: 0px 0px 3px black;
+}
+
+.authbutton a:visited{
+  color: white;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 60%;
+  z-index: -1; 
+  background-image: url("./public/assets/albumsgrid.png");
+  background-repeat: repeat-x; 
+  background-position: 0 0; 
+  background-size: cover;
+  animation: slide 75s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+      background-position: 0 0;
+  }
+  100% {
+      background-position: -3900px 0;
+  }
+}
+
+.background-gradient-top{
+  position: absolute;
+  display: center;
+  z-index: -1; 
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 40vh;
+}
+
+.background-gradient-bottom{
+  position: absolute;
+  display: center;
+  z-index: -1; 
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  top: 1;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 30vh;
+}
