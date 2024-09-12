@@ -1,9 +1,9 @@
 body{
-  display: flex;
   flex-direction: column;
   align-items: center; 
   justify-content: center; 
-  height: 100vh;
+  height: 100%;
+  overflow-y: auto;
   margin: 0;
   font-family: 'Segoe UI', Roboto, Oxygen;
   background: linear-gradient(to top,#141414, #545454); 
@@ -11,31 +11,261 @@ body{
   background-attachment: fixed;
 }
 
-.headerbox {
+.listening-history-container {
+  padding: 20px;
+  margin-top: -15px;
+  text-align: center;
+}
+
+.top-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  animation: fade-down 0.75s ease;
+}
+
+.top-header h2 {
+  margin: 5px;
+  color: white;
+  text-shadow: 0px 0px 10px black;
+  font-weight: 400;
+  font-size: 2.5rem;
+}
+
+.volume-control{
+  margin-top: 10px;
+  text-shadow: 0px 0px 10px black;
+  color: white;
+}
+
+.volume-control input[type="range"] {
+  width: 100px;
+}
+
+.volume-bar{
+  -webkit-appearance: none; 
+  width: 100%; 
+  height: 8px; 
+  background: #adadad; 
+  border-radius: 5px; 
+  outline: none; 
+  margin-left: 10px;
+
+}
+
+.timeRange{
+  margin-top: 3px;
+  margin-bottom: -3px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.volume-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px; 
+  height: 20px;
+  background-color: #1db954; 
+  border-radius: 50%; 
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
+}
+
+.listening-history-sections {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+
+}
+
+.section {
+  width: 30%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 15px;
+  text-align: left;
+  animation: fade-up 0.75s ease;
+
+}
+
+.section h3 {
+  color: white;
+  text-align: center;
+  font-size: 1.75rem;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.track-item, .album-item, .artist-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-left: -20px;
+}
+
+.album-title, .artist-item{
+  color: white;
+}
+
+.album-artist{
+  color: #b3b3b3;
+}
+
+.track-item img, .album-item img {
+  margin-right: 10px;
+}
+
+.preview-button {
+  background-color: #1db954;
+  text-align: center;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.track-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-title {
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+  font-size: 1rem;
+}
+
+.artist-album {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
+  padding-top: 60px;
+  text-align: center;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  height: 100%;
+  padding-top: 100px;
+  text-align: center;
+}
+
+.dashboard-header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(to bottom,#1f1f1f, #545454); 
+  color: white;
+  font-family: 'Segoe UI', Roboto, Oxygen;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+  z-index: 5;
+  display: flex;
+  animation: fade-in 0.75s ease;
+
+}
+
+.dashboard-header .dashboard-header-left{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 50%;
+}
+
+.dashboard-header .dashboard-header-left h1{
+  font-weight: 400;
+  margin: 5px;
+  margin-left: 15px;
+  font-size: 2.5rem;
+  text-shadow: 0px 0px 10px black;
+  letter-spacing: 2px;
+}
+
+.dashboard-header .dashboard-header-left p{
+  color: rgb(207, 207, 207);
+  margin: 0;
+  margin-left: 20px;
+  font-size: 1.5rem;
+  text-shadow: 0px 0px 10px black;
+}
+
+.dashboard-header .dashboard-header-right{
+  width: 50%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.dashboard-header .dashboard-header-right .logout-button button{
+  font-family: 'Segoe UI', Roboto, Oxygen;
+  text-align: center;
+  background-color: #1db954;
+  border-radius: 30px;
+  color: #191414;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 8rem;
+  outline: white solid 2px;
+  padding: 10px;
+  margin-right: 35px;
+}
+
+.dashboard-header .dashboard-header-right .logout-button button:hover{
+  color: white;
+  text-shadow: 0px 0px 3px black;
+}
+
+.dashboard-header .dashboard-header-right .logout-button button:hover{
+  background-color: #1ecf5c;
+  text-shadow: 0px 0px 3px black;
+}
+
+.headerbox{
   display: flex;
   justify-content: center;
   align-items: center;
   left: 5px;
+  animation: fade-down 0.75s ease;
 }
 
-.headerbox .header {
+.headerbox .header{
   text-shadow: 0px 0px 10px black;
   color: white;
   font-size: 4rem;
-
 }
 
 .headerbox .logo {
   background: no-repeat;
-  background-image: url("./public/assets/spotifylogo.png");
+  background-image: url("./assets/spotifylogo.png");
   height: 70px;
   width: 70px;
   background-size: cover;
   background-position: center;
-  margin-left: 20px;
+  margin-left: 15px;
 }
 
-.authbutton {
+.authbutton{
   margin-top: 20px;
   text-align: center;
   background-color: #1db954;
@@ -44,35 +274,76 @@ body{
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
+  width: 12rem;
   outline: white solid 2px;
   padding: 10px;
+  animation: fade-up 0.75s ease;
 }
 
-.authbutton a:hover{
+.authbutton:hover{
   color: white;
   text-shadow: 0px 0px 3px black;
 }
 
-.authbutton a:visited{
-  color: white;
+.authbutton:hover{
+  background-color: #1ecf5c;
+  text-shadow: 0px 0px 3px black;
 }
 
-.background {
+.background{
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 60%;
+  opacity: 65%;
   z-index: -1; 
-  background-image: url("./public/assets/albumsgrid.png");
+  background-image: url("./assets/albumsgrid.png");
   background-repeat: repeat-x; 
   background-position: 0 0; 
   background-size: cover;
   animation: slide 75s linear infinite;
+
 }
 
-@keyframes slide {
+.background-gradient{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.75));
+  animation: vignette 1s ease-in-out forwards;
+  z-index: -1;
+}
+
+.gradient-transition{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0%;
+  background: linear-gradient(to top,#141414, #545454); 
+  animation: vignette 2s ease-in forwards;
+  z-index: 5;
+}
+
+.auth-success-message{
+  display: relative;
+  position: absolute;
+  bottom: 30%; 
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  text-shadow: 0px 0px 10px black;
+  color: white;
+  font-size: 2rem;
+  animation: fade-in-out 2s ease-out;
+  z-index: 6;
+}
+
+@keyframes slide{
   0% {
       background-position: 0 0;
   }
@@ -81,26 +352,59 @@ body{
   }
 }
 
-.background-gradient-top{
-  position: absolute;
-  display: center;
-  z-index: -1; 
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  height: 40vh;
+@keyframes fade-up{
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
 }
 
-.background-gradient-bottom{
-  position: absolute;
-  display: center;
-  z-index: -1; 
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-  top: 1;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  height: 30vh;
+@keyframes fade-in-out{
+  0% {
+    opacity: 0;
+  }
+  
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-down{
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes fade-in{
+  0% {
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes vignette{
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
 }

@@ -6,7 +6,7 @@ export function generateCodeVerifier(length = 128) {
         return values.reduce((acc, x) => acc + possible[x % possible.length], "");
     }
     
-    const codeVerifier  = generateRandomString(64);
+    return generateRandomString(64);
 }
 
 export async function generateCodeChallenge(codeVerifier) {
@@ -15,13 +15,43 @@ export async function generateCodeChallenge(codeVerifier) {
         const data = encoder.encode(plain)
         return window.crypto.subtle.digest('SHA-256', data)
     }
+    const digest = await sha256(codeVerifier);
+
+    // base64 url Encode the sha-256 hash
+    return btoa(String.fromCharCode.apply(null, new Uint8Array(digest)))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');  // base64 url encoding   
 }
 
-const codeVerifier = generateCodeVerifier();
-generateCodeChallenge(codeVerifier).then(codeChallenge => {
-    localStorage.setItem('codeVerifier', codeVerifier);
-    localStorage.setItem('codeChallenge', codeChallenge); 
-});
+export async function exchangeAuthorizationCodeForToken(code) {
+    const codeVerifier = localStorage.getItem('codeVerifier'); // Get code verifier from localStorage
+    
+    // console.log('Exchanging authorization code:', code);  // log code
+    // console.log('Using codeVerifier:', codeVerifier);     // log code verifier
 
+    // send code and verifier to flask
+    const response = await fetch('http://localhost:5000/token', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            code: code,
+            codeVerifier: codeVerifier,
+        }),
+    });
 
-export default generateCodeChallenge; generateCodeVerifier;
+    // recieve access token from flask
+    const data = await response.json();
+    
+    // store token in localStorage
+    if (data.access_token) {
+        localStorage.setItem('spotifyAccessToken', data.access_token);
+        return data.access_token;
+    } else {
+        console.log('Backend response:', data); 
+        throw new Error('Access token not returned by the backend');
+    }
+
+}

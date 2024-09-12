@@ -1,34 +1,40 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import Header from "./components/Header";
 import AuthButton from "./components/AuthButton";
-import LogoutButton from './components/LogoutButton';
-import exchangeAuthorizationCodeForToken from './components/AuthorizeHelpers';
-
-const code = new URLSearchParams(window.location.search).get("code")
+import TopListeningHistory from './components/TopListeningHistory';
+import DashboardHeader from './components/DashboardHeader';
+import {exchangeAuthorizationCodeForToken} from './components/AuthorizeHelpers';
 
 function App() {
     const [accessToken, setAccessToken] = useState(null);
+    const [authSuccess, setAuthSuccess] = useState(false); 
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
-        if (code) {
+        
+        if (!localStorage.getItem('spotifyAccessToken') && code) {
             exchangeAuthorizationCodeForToken(code)
                 .then((token) => {
-                    setAccessToken(token);
+                    setAuthSuccess(true);  
                     localStorage.setItem('spotifyAccessToken', token);
-                    window.history.pushState({}, null, "/");
+                    setTimeout(() => {
+                        setAccessToken(token); 
+                    }, 2000);
+                    window.history.replaceState({}, null, "/");
                 })
                 .catch((error) => {
                     console.error('Error fetching token:', error);
-                });
-            } else {
-                const savedToken = localStorage.getItem('spotifyAccessToken');
-                if (savedToken) {
-                    setAccessToken(savedToken);
-                }
+                })
+
+        } else {
+            const savedToken = localStorage.getItem('spotifyAccessToken');
+            if (savedToken) {
+                setAccessToken(savedToken);
             }
+        }
+
     }, []);
 
     return(
@@ -36,16 +42,25 @@ function App() {
             {!accessToken ? (
                 <div>
                     <div className="background"></div>
-                    <div className="background-gradient-top"></div>
-                    <div className="background-gradient-bottom"></div>
-                    <Header/>
-                    <AuthButton/>
+                    <div className="background-gradient"></div>
+                    <div className="login-container">
+                        <Header/>
+                        <AuthButton/>   
+                    </div>
+                    {authSuccess && (
+                        <div>
+                            <p className="auth-success-message">Authorization successful!</p>
+                            <div className="gradient-transition"></div>
+                        </div>
+                        )}
                 </div>
             ) : (
                 <div>
-                    <h1>Welcome Back!</h1>
-                    <LogoutButton/>
-                </div>
+                    <DashboardHeader/>
+                    <div className="dashboard-container">
+                        <TopListeningHistory/>
+                    </div>
+                </div>    
             )}
         </div>
     )
