@@ -87,69 +87,73 @@ function TopListeningHistory() {
 
     return (
         <div className="listening-history-container">
-        {/* header, time range, volume bar */}
-        <div className="top-header">
-            <h2>Top Listening History</h2>
-            <select className="timeRange" value={timeRange} onChange={handleTimeRangeChange}>
-                <option value="short_term">Past 4 weeks</option>
-                <option value="medium_term">Past 6 months</option>
-                <option value="long_term">Past year</option>
-            </select>
-            <div className="volume-control">
-                <label>Volume:</label>
-                <input className="volume-bar" type="range" min="0" max="0.1" step="0.01" value={volume} onChange={handleVolumeChange} />
-            </div>
-        </div>
-
-        {/* top: songs, albums, and artists sections */}
-        <div className="listening-history-sections">
-            {/* top songs */}
-            <div className="section songs-section">
-                <h3>Top Songs</h3>
-            <ul>
-                {topTracks.map((track, index) => (
-                <li key={track.id} className="track-item">
-                    <button className="preview-button" onClick={() => handlePreview(track)}>
-                        {playingTrackId === track.id ? '❚❚' : '▶'}
-                    </button>
-                    <img src={track.album.images[0]?.url} alt={`${track.name} album cover`} width="50px" />
-                        <div className="track-details">
-                        <div className="song-title">{index + 1}. {track.name}</div>
-                        <div className="artist-album">{track.artists[0].name} - {track.album.name}</div>
-                    </div>
-                </li>
-                ))}
-            </ul>
+            {/* header, time range, volume bar */}
+            <div className="top-header">
+                <h2>Top Listening History</h2>
+                <select className="timeRange" value={timeRange} onChange={handleTimeRangeChange}>
+                    <option value="short_term">Past 4 weeks</option>
+                    <option value="medium_term">Past 6 months</option>
+                    <option value="long_term">Past year</option>
+                </select>
+                <div className="volume-control">
+                    <label>Volume:</label>
+                    <input className="volume-bar" type="range" min="0" max="0.1" step="0.01" value={volume} onChange={handleVolumeChange} />
+                </div>
             </div>
 
-            {/* top albums */}
-            <div className="section albums-section">
-                <h3>Top Albums</h3>
-            <ul>
-                {topAlbums.map((album, index) => (
-                <li key={album.id} className="album-item">
-                    <img src={album.images[0]?.url} alt={`${album.name} album cover`} width="50px"/>
-                    <div className="album-details">
-                        <div className="album-title">{index + 1}. {album.name}</div>
-                        <div className="album-artist">{album.artists[0].name}</div>
-                    </div>                
-                </li>
-                ))}
-            </ul>
-            </div>
+            {/* top: songs, albums, and artists sections */}
+            <div className="listening-history-sections">
+                {/* top songs */}
+                <div className="section songs-section">
+                    <h3>Top Songs</h3>
+                <ul>
+                    {topTracks.map((track, index) => (
+                    <li key={track.id} className="track-item">
+                        <button className="preview-button" onClick={() => handlePreview(track)}>
+                            {playingTrackId === track.id ? '❚❚' : '▶'}
+                        </button>
+                        <img src={track.album.images[0]?.url} alt={`${track.name} album cover`} width="50px" />
+                            <div className="track-details">
+                                <div className="song-title">{index + 1}. {track.name}</div>
+                                <div className="artist-album">{track.artists[0].name} - {track.album.name}</div>
+                            </div>
+                    </li>
+                    ))}
+                </ul>
+                </div>
 
-            {/* top artists */}
-            <div className="section artists-section">
-                <h3>Top Artists</h3>
-            <ul>
-                {topArtists.map((artist, index) => (
-                <li key={artist.id} className="artist-item">
-                    <span>{index + 1}. {artist.name}</span>
-                </li>
-                ))}
-            </ul>
+                {/* top albums */}
+                <div className="section albums-section">
+                    <h3>Top Albums</h3>
+                <ul>
+                    {topAlbums.map((album, index) => (
+                    <li key={album.id} className="album-item">
+                        <img src={album.images[0]?.url} alt={`${album.name} album cover`} width="50px"/>
+                        <div className="album-details">
+                            <div className="album-title">{index + 1}. {album.name}</div>
+                            <div className="album-artist">{album.artists[0].name}</div>
+                        </div>                
+                    </li>
+                    ))}
+                </ul>
+                </div>
+
+                {/* top artists */}
+                <div className="section artists-section">
+                    <h3>Top Artists</h3>
+                <ul>
+                    {topArtists.map((artist, index) => (
+                    <li key={artist.id} className="artist-item">
+                        <img src={artist.images[0]?.url} alt={`${artist.name} album cover`} width="50px"/>
+                        <div className="artist-details">
+                            <div>{index + 1}. {artist.name}</div>
+                            <div className="artist-genres">{artist.genres.join(", ")}</div>
+                        </div>
+                    </li>
+                    ))}
+                </ul>
+                </div>
             </div>
-        </div>
         </div>
     );
 }

@@ -5,6 +5,7 @@ import AuthButton from "./components/AuthButton";
 import TopListeningHistory from './components/TopListeningHistory';
 import DashboardHeader from './components/DashboardHeader';
 import {exchangeAuthorizationCodeForToken} from './components/AuthorizeHelpers';
+import Recommendations from './components/Recommendations';
 
 function App() {
     const [accessToken, setAccessToken] = useState(null);
@@ -49,15 +50,15 @@ function App() {
                     </div>
                     {authSuccess && (
                         <div>
-                            <p className="auth-success-message">Authorization successful!</p>
                             <div className="gradient-transition"></div>
                         </div>
-                        )}
+                    )}
                 </div>
             ) : (
                 <div>
                     <DashboardHeader/>
                     <div className="dashboard-container">
+                        <Recommendations/>
                         <TopListeningHistory/>
                     </div>
                 </div>    
@@ -65,6 +66,5 @@ function App() {
         </div>
     )
 }
-  
 
 export default App;

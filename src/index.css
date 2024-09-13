@@ -11,9 +11,119 @@ body{
   background-attachment: fixed;
 }
 
+.recommendations-container {
+  padding: 20px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.search-section, .attributes-section, .playlist-section {
+  color: white;
+  height: 700px;
+  overflow-y: auto;
+  width: 30%;
+  background: linear-gradient(to top,#1a1a1a, #2d2d2d); 
+  box-shadow: 0px 0px 10px #1db954;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: left;
+  animation: fade-up 0.75s ease;
+}
+
+.search-section img{
+  border-radius: 50%;
+  object-fit: cover;
+  height: 50px;
+  width: 50px;
+}
+
+.recommendations-container .search-section h4, .playlist-section h4 {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #1db954;
+}
+
+
+.recommendations-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 10px;
+
+}
+
+.recommendations-container ul li {
+  margin: 5px 0;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+
+.recommendations-container ul li:hover {
+  color: #1db954;
+  background-color: rgba(0, 0, 0, 0.221);
+  border-radius: 20px;
+}
+
+
+.recommendations-container input[type="text"] {
+  width: 50%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+
+.recommendations-container button {
+  padding: 10px;
+  background-color: #1db954;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+}
+
+.recommendations-container button:hover {
+  background-color: #17a04d;
+}
+
+.recommendations-container .playlist-results {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.recommendations-container .playlist-results li {
+  padding: 5px 0;
+  border-bottom: 1px solid #444;
+}
+
+.recommendations-container input[type="range"] {
+  width: 100%;
+}
+
+.recommendations-container .sliders div {
+  margin-bottom: 30px;
+}
+
+.recommendations-container select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+  background-color: #444;
+  color: white;
+}
+
+
+
 .listening-history-container {
   padding: 20px;
-  margin-top: -15px;
+  margin-top: 0px;
   text-align: center;
 }
 
@@ -51,7 +161,7 @@ body{
   border-radius: 5px; 
   outline: none; 
   margin-left: 10px;
-
+  margin-bottom: 25px;
 }
 
 .timeRange{
@@ -86,7 +196,8 @@ body{
 
 .section {
   width: 30%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to top,#111111, #252525); 
+  box-shadow: 0px 0px 10px #1db954;
   padding: 15px;
   border-radius: 15px;
   text-align: left;
@@ -106,7 +217,11 @@ body{
   display: flex;
   align-items: center;
   margin-bottom: 15px;
-  margin-left: -20px;
+  margin-left: -25px;
+}
+
+li{
+  animation: fade-in 0.75s ease;
 }
 
 .album-title, .artist-item{
@@ -117,11 +232,25 @@ body{
   color: #b3b3b3;
 }
 
-.track-item img, .album-item img {
-  margin-right: 10px;
+.track-item img, .album-item, img{
+  margin-right: 15px;
 }
 
-.preview-button {
+.artist-item img{
+  border-radius: 50%;
+  object-fit: cover;
+  height: 50px;
+  width: 50px;
+}
+
+.artist-genres{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 70px;
+  color: #b3b3b3;
+}
+
+.preview-button{
   background-color: #1db954;
   text-align: center;
   color: white;
@@ -132,7 +261,12 @@ body{
   margin-right: 15px;
 }
 
-.track-details {
+.preview-button:focus{
+  background-color: #28e46a;
+  border: 2px solid white;
+}
+
+.track-details{
   display: flex;
   flex-direction: column;
 }
@@ -142,7 +276,7 @@ body{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 150px;
+  max-width: 250px;
   font-size: 1rem;
 }
 
@@ -166,7 +300,7 @@ body{
   flex-direction: column;
   justify-content: left;
   height: 100%;
-  padding-top: 100px;
+  padding-top: 70px;
   text-align: center;
 }
 
@@ -327,20 +461,6 @@ body{
   background: linear-gradient(to top,#141414, #545454); 
   animation: vignette 2s ease-in forwards;
   z-index: 5;
-}
-
-.auth-success-message{
-  display: relative;
-  position: absolute;
-  bottom: 30%; 
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-  text-shadow: 0px 0px 10px black;
-  color: white;
-  font-size: 2rem;
-  animation: fade-in-out 2s ease-out;
-  z-index: 6;
 }
 
 @keyframes slide{
