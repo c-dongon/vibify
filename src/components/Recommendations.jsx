@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
+import {Preview} from './Preview';
 
 const Recommendations = () => {
   const [searchTermArtist, setSearchTermArtist] = useState('');
@@ -7,16 +8,28 @@ const Recommendations = () => {
   const [songResults, setSongResults] = useState([]);
   const [selectedArtists, setSelectedArtists] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
-  const [trackAttributes, setTrackAttributes] = useState({
-    acousticness: 0.5,
-    energy: 0.5,
-    valence: 0.5,
-    danceability: 0.5,
-    loudness: 0.5,
-    instrumentalness: 0.5,
-  });
+  const {handlePreview, playingTrackId, showNoPreviewMessage} = Preview();
   const [generatedPlaylist, setGeneratedPlaylist] = useState([]);
   const [selectedPreset, setSelectedPreset] = useState('');
+  const [trackAttributes, setTrackAttributes] = useState({
+    Acousticness: 0.5,
+    Energy: 0.5,
+    Valence: 0.5,
+    Danceability: 0.5,
+    Tempo: 130,
+    Loudness: 0.5,
+    Instrumentalness: 0.5,
+  });
+  const attributeLabels = {
+    Acousticness: {left: "Digital", right: "Acoustic"},
+    Energy: {left: "Calm", right: "Energetic"},
+    Valence: {left: "Sad", right: "Happy"},
+    Danceability:{ left: "Stiff", right: "Groovy"},
+    Tempo: {left: "Slow", right: "Fast"},
+    Loudness: {left: "Quiet", right: "Loud"},
+    Instrumentalness: {left: "Vocal", right: "Instrumental"}
+  };
+
 
   const fetchSpotifyResults = async (query, type) => {
     const accessToken = localStorage.getItem('spotifyAccessToken');
@@ -75,28 +88,47 @@ const Recommendations = () => {
     const preset = e.target.value;
     setSelectedPreset(preset);
     switch (preset) {
-      case 'Happy':
-        setTrackAttributes({
-          acousticness: 0.3,
-          energy: 0.8,
-          valence: 1,
-          danceability: 0.7,
-          loudness: 0.5,
-          instrumentalness: 0.1,
-        });
+      case 'Cheerful':
+        setTrackAttributes({Acousticness: 0.2, Energy: 0.9, Valence: 0.9, Danceability: 0.8, Tempo: 130, Loudness: 0.7, Instrumentalness: 0.4});
         break;
-      default:
+      case 'Gloomy':
+        setTrackAttributes({Acousticness: 0.7, Energy: 0.2, Valence: 0.2, Danceability: 0.3, Tempo: 70, Loudness: 0.4, Instrumentalness: 0.4});
+        break;
+      case 'Energetic':
+        setTrackAttributes({Acousticness: 0.1, Energy: 1, Valence: 0.7, Danceability: 0.8, Tempo: 150, Loudness: 0.9, Instrumentalness: 0.1});
+        break;
+      case 'Calm':
+        setTrackAttributes({Acousticness: 0.8, Energy: 0.3, Valence: 0.6, Danceability: 0.3, Tempo: 70, Loudness: 0.3, Instrumentalness: 0.4});
+        break;
+      case 'Melancholy':
+        setTrackAttributes({Acousticness: 0.6, Energy: 0.1, Valence: 0.2, Danceability: 0.4, Tempo: 60, Loudness: 0.2, Instrumentalness: 0.4});
+        break;
+      case 'Uplifting':
+        setTrackAttributes({Acousticness: 0.3, Energy: 0.8, Valence: 0.9, Danceability: 0.7, Tempo: 130, Loudness: 0.8, Instrumentalness: 0.3});
+        break;
+      case 'Chill':
+        setTrackAttributes({Acousticness: 0.7, Energy: 0.4, Valence: 0.5, Danceability: 0.6, Tempo: 120, Loudness: 0.4, Instrumentalness: 0.6});
         break;
     }
+    
   };
 
+
+
   const generatePlaylist = async () => {
+    if (selectedArtists.length === 0 && selectedSongs.length === 0) {
+      alert('Must select at least one song or artist!');
+      return;
+    }
+    if (selectedArtists.length + selectedSongs.length > 5) {
+      alert('You can only select a total of 5 items (artists or tracks).');
+    }
     const accessToken = localStorage.getItem('spotifyAccessToken');
     const artistSeeds = selectedArtists.map(artist => artist.id).join(',');
     const songSeeds = selectedSongs.map(song => song.id).join(',');
 
     const response = await fetch(
-      `https://api.spotify.com/v1/recommendations?limit=30&seed_artists=${artistSeeds}&seed_tracks=${songSeeds}&target_acousticness=${trackAttributes.acousticness}&target_energy=${trackAttributes.energy}&target_danceability=${trackAttributes.danceability}&target_loudness=${trackAttributes.loudness}&target_instrumentalness=${trackAttributes.instrumentalness}`,
+      `https://api.spotify.com/v1/recommendations?limit=30&seed_artists=${artistSeeds}&seed_tracks=${songSeeds}&target_acousticness=${trackAttributes.Acousticness}&target_energy=${trackAttributes.Energy}&target_danceability=${trackAttributes.Danceability}&target_loudness=${trackAttributes.Loudness}&target_instrumentalness=${trackAttributes.Instrumentalness}&target_tempo=${trackAttributes.Tempo}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -108,6 +140,11 @@ const Recommendations = () => {
   };
 
   const savePlaylist = async () => {
+    if (generatedPlaylist.length === 0) {
+      alert('Must create a playlist first!');
+      return;
+    }
+
     const accessToken = localStorage.getItem('spotifyAccessToken');
     const userResponse = await fetch('https://api.spotify.com/v1/me', {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -152,12 +189,13 @@ const Recommendations = () => {
   return (
     <div className="recommendations-container">
       <div className="top-header">
-        <h2>Pick Your Vibe</h2>
+        <h2>Find Your Vibe</h2>
       </div>
       {/* artist/song selection */}
       <div className="listening-history-sections">  
         <div className="search-section">
           <div>
+            <h3>Select artists/songs <span>(5 max)</span></h3>
             <label>Search artists: </label>
             <input type="text" value={searchTermArtist} onChange={handleArtistSearch} />
             <ul>
@@ -175,7 +213,7 @@ const Recommendations = () => {
             <ul>
               {selectedArtists.map(artist => (
               <li key={artist.id} className="artist-item" onClick={() => handleArtistSelection(artist)} style={{ cursor: 'pointer' }}>
-                <img src={artist.images[0]?.url} alt={`${artist.name} album cover`} width="50px"/>
+                <img src={artist.images[0]?.url} alt={`${artist.name} album cover`}/>
                 <div className="artist-details">
                   <div>{`${artist.name} ✖`}</div>
                 </div>
@@ -188,21 +226,36 @@ const Recommendations = () => {
             <label>Search songs: </label>
             <input type="text" value={searchTermSong} onChange={handleSongSearch} />
             <ul>
-              {songResults.map(song => (
-                <li key={song.id} onClick={() => handleSongSelection(song)}>
-                  {song.name} - {song.artists[0].name}
+              {songResults.map((track, index) => (
+                <li key={track.id} className="track-item" onClick={() => handleSongSelection(track)}>
+                    <button className="preview-button" onClick={(e) =>
+                        {e.stopPropagation();
+                        handlePreview(track);}}
+                    >
+                      {playingTrackId === track.id ? '❚❚' : '▶'}
+                      {showNoPreviewMessage && (
+                          <div className="no-preview-message" >
+                              No preview available for this track.
+                          </div>
+                      )}
+                    </button>
+                    <img src={track.album.images[0]?.url} alt={`${track.name} album cover`} width="50px" />
+                    <div className="track-details">
+                      <div className="song-title"> {track.name}</div>
+                      <div className="artist-album">{track.artists[0].name} - {track.album.name}</div>
+                    </div>
                 </li>
               ))}
             </ul>
             <h4>Selected Songs:</h4>
             <ul>
-              {selectedSongs.map(song => (
-                <li
-                key={song.id}
-                onClick={() => handleSongSelection(song)}
-                style={{ cursor: 'pointer' }}
-                >
-                {song.name} - {song.artists[0].name} 
+              {selectedSongs.map((track, index) => (
+                <li key={track.id} className="track-item" onClick={() => handleSongSelection(track)} style={{ cursor: 'pointer' }}>
+                    <img src={track.album.images[0]?.url} alt={`${track.name} album cover`} width="50px" />
+                    <div className="track-details">
+                      <div className="song-title"> {`${track.name} ✖`}</div>
+                      <div className="artist-album">{track.artists[0].name} - {track.album.name}</div>
+                    </div>
                 </li>
               ))}
             </ul>
@@ -211,24 +264,29 @@ const Recommendations = () => {
 
         {/* track attributes */}
         <div className="attributes-section">
-          <label>Pick a preset:</label>
+          <h3>Adjust Attributes</h3>
+          <label>Presets:</label>
           <select onChange={handlePresetChange} value={selectedPreset}>
             <option value="">Select a preset</option>
-            <option value="Happy">Happy</option>
+            <option value="Cheerful">Cheerful</option>
+            <option value="Gloomy">Gloomy</option>
+            <option value="Melancholy">Melancholy</option>
+            <option value="Energetic">Energetic</option>
+            <option value="Uplifting">Uplifting</option>
+            <option value="Chill">Chill</option>
           </select>
           <div className="sliders">
-            {['acousticness', 'energy', 'valence', 'danceability', 'loudness', 'instrumentalness'].map(attr => (
+            {['Acousticness', 'Energy', 'Valence', 'Danceability', 'Tempo', 'Loudness', 'Instrumentalness'].map(attr => (
               <div key={attr}>
                 <label>{attr}</label>
-                <input
-                  type="range"
-                  name={attr}
-                  min="0"
-                  max="1"
-                  step="0.2"
-                  value={trackAttributes[attr]}
-                  onChange={handleTrackAttributeChange}
-                />
+                {attr !== "Tempo" ? (
+                  <input type="range" name={attr} min="0" max="1" step="0.1" value={trackAttributes[attr]} onChange={handleTrackAttributeChange}/>
+                ) : (
+                  <input type="range" name={attr} min="60" max="200" step="1" value={trackAttributes[attr]} onChange={handleTrackAttributeChange}/>)}
+                <div className="slider-labels">
+                  <span>{attributeLabels[attr].left}</span>
+                  <span>{attributeLabels[attr].right}</span>
+              </div>
               </div>
             ))}
           </div>
@@ -236,19 +294,27 @@ const Recommendations = () => {
 
         {/* create playlist */}
         <div className="playlist-section">
-          <button onClick={generatePlaylist}>Create Playlist</button>
+          <h3>Discover Songs</h3>
+          <button className="playlist-button" onClick={generatePlaylist}>Create Playlist</button>
           <ul className="playlist-results">
-            {generatedPlaylist.map((track, index) => (
-                    <li key={track.id} className="track-item">
-                    <img src={track.album.images[0]?.url} alt={`${track.name} album cover`} width="50px" />
-                        <div className="track-details">
-                            <div className="song-title">{index + 1}. {track.name}</div>
-                            <div className="artist-album">{track.artists[0].name} - {track.album.name}</div>
-                        </div>
+            {generatedPlaylist?.length > 0 ? (
+              generatedPlaylist.map((track, index) => (
+                <li key={track.id} className="track-item">
+                  <button className="preview-button" onClick={() => handlePreview(track)}>
+                    {playingTrackId === track.id ? '❚❚' : '▶'}
+                  </button>
+                  <img src={track.album.images[0]?.url} alt={`${track.name} album cover`} width="50px" />
+                  <div className="track-details">
+                    <div className="song-title">{index + 1}. {track.name}</div>
+                    <div className="artist-album">{track.artists[0].name} - {track.album.name}</div>
+                  </div>
                 </li>            
-              ))}
+              ))
+            ) : (
+              <p>No playlist generated yet.</p>
+            )}
           </ul>
-          <button onClick={savePlaylist}>Save Playlist</button>
+          <button className="playlist-button" onClick={savePlaylist}>Save Playlist</button>
         </div>
       </div>
     </div>

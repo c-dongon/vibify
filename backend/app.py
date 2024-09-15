@@ -3,7 +3,6 @@ from flask_cors import CORS
 import requests
 
 app = Flask(__name__)
-
 CORS(app)
 
 CLIENT_ID = '55d70b42b28542e38aeb268736c810b6'

@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
+import {Preview} from './Preview';
+
 
 const handleTokenExpiry = () => {
     localStorage.removeItem('spotifyAccessToken');
@@ -11,9 +13,8 @@ function TopListeningHistory() {
     const [topTracks, setTopTracks] = useState([]);
     const [topAlbums, setTopAlbums] = useState([]);
     const [topArtists, setTopArtists] = useState([]);
-    const [playingTrackId, setPlayingTrackId] = useState(null);
-    const [audio, setAudio] = useState(null);
-    const [volume, setVolume] = useState(0.05);
+    const {handlePreview, playingTrackId, showNoPreviewMessage} = Preview();
+
 
     const handleTimeRangeChange = (e) => {
          setTimeRange(e.target.value);
@@ -65,29 +66,9 @@ function TopListeningHistory() {
     }
   };
 
-    const handlePreview = (track) => {
-        if (playingTrackId === track.id) {
-        audio.pause();
-        setPlayingTrackId(null);
-        } else {
-        if (audio) audio.pause();
-        const newAudio = new Audio(track.preview_url);
-        newAudio.volume = volume;
-        newAudio.play();
-        setAudio(newAudio);
-        setPlayingTrackId(track.id);
-        }
-    };
-
-    const handleVolumeChange = (e) => {
-        const newVolume = e.target.value;
-        setVolume(newVolume);
-        if (audio) audio.volume = newVolume;
-    };
-
     return (
         <div className="listening-history-container">
-            {/* header, time range, volume bar */}
+            {/* header, time range */}
             <div className="top-header">
                 <h2>Top Listening History</h2>
                 <select className="timeRange" value={timeRange} onChange={handleTimeRangeChange}>
@@ -95,10 +76,6 @@ function TopListeningHistory() {
                     <option value="medium_term">Past 6 months</option>
                     <option value="long_term">Past year</option>
                 </select>
-                <div className="volume-control">
-                    <label>Volume:</label>
-                    <input className="volume-bar" type="range" min="0" max="0.1" step="0.01" value={volume} onChange={handleVolumeChange} />
-                </div>
             </div>
 
             {/* top: songs, albums, and artists sections */}
@@ -111,6 +88,11 @@ function TopListeningHistory() {
                     <li key={track.id} className="track-item">
                         <button className="preview-button" onClick={() => handlePreview(track)}>
                             {playingTrackId === track.id ? '❚❚' : '▶'}
+                            {showNoPreviewMessage && (
+                            <div className="no-preview-message">
+                                No preview available for this track.
+                            </div>
+                      )}
                         </button>
                         <img src={track.album.images[0]?.url} alt={`${track.name} album cover`} width="50px" />
                             <div className="track-details">

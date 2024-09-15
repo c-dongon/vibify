@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import LogoutButton from './LogoutButton';
 
 function DashboardHeader() {
@@ -30,8 +30,7 @@ function DashboardHeader() {
         };
 
         fetchUserName();
-    }, []);
-    
+});
     return (
         <header className="dashboard-header">
             <div className="dashboard-header-left">
@@ -39,7 +38,7 @@ function DashboardHeader() {
                 <p>Hello, {userName}!</p>
             </div>
             <div className="dashboard-header-right">
-                <LogoutButton/>
+                <LogoutButton />
             </div>
         </header>
     );
