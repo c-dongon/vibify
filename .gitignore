@@ -25,4 +25,4 @@ venv/
 *.sw?
 
 # to keep client secret.. a secret
-.env
+keys.env
