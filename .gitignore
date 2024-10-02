@@ -23,3 +23,6 @@ venv/
 *.njsproj
 *.sln
 *.sw?
+
+# to keep client secret.. a secret
+.env

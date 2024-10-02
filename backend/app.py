@@ -2,11 +2,18 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv('keys.env')
+CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID')
+CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
+
+# print(f"Id: {CLIENT_ID} Secret: {CLIENT_SECRET}")
+
 app = Flask(__name__)
 CORS(app)
 
-CLIENT_ID = '55d70b42b28542e38aeb268736c810b6'
-CLIENT_SECRET = '1e2d76568fd748ea9f5601b13232ff75'
 REDIRECT_URI = 'http://localhost:5173'
 
 # route to handle the token exchange
