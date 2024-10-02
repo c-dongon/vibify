@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {generateCodeVerifier, generateCodeChallenge} from './AuthorizeHelpers';
 
 const CLIENT_ID = '55d70b42b28542e38aeb268736c810b6';
-const REDIRECT_URI = 'http://localhost:5173';
+const REDIRECT_URI = 'https://illustrious-dusk-9279a7.netlify.app/';
 const SCOPES = 'user-read-private user-read-email playlist-modify-public user-top-read user-read-recently-played';
 
 function AuthButton() {

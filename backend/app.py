@@ -14,7 +14,7 @@ CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 app = Flask(__name__)
 CORS(app)
 
-REDIRECT_URI = 'http://localhost:5173'
+REDIRECT_URI = 'https://illustrious-dusk-9279a7.netlify.app/'
 
 # route to handle the token exchange
 @app.route('/token', methods=['POST'])
