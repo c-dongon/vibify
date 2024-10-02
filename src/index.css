@@ -255,7 +255,7 @@ body{
   align-items: center;
   margin-bottom: 20px;
   animation: fade-down 0.75s ease;
-  background: radial-gradient(rgba(0, 255, 9, 0.185), rgba(3, 255, 12, 0)); 
+  text-shadow: 0px 0px 10px #1db954;
 }
 
 .top-header h2{
@@ -443,6 +443,13 @@ li{
   display: flex;
   animation: fade-in 0.75s ease;
 
+}
+.user-profile-img{
+  border-radius: 50%;
+  object-fit: cover;
+  height: 50px;
+  width: 50px;
+  margin-left: 15px;
 }
 
 .dashboard-header .dashboard-header-left{
