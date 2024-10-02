@@ -11,6 +11,45 @@ body{
   background-attachment: fixed;
 }
 
+@media screen and (max-width: 768px) {
+  body {
+    overflow: hidden; 
+    height: 100vh; 
+  }
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    padding: 0; 
+    overflow: hidden; 
+  }
+
+  .listening-history-container {
+      display: flex;
+      flex-direction: column; 
+      align-items: center; 
+  }
+
+  .listening-history-sections {
+      width: 100%; 
+      margin-bottom: 20px; 
+  }
+
+  .recommendations-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .search-section, .attributes-section, .playlist-section  {
+    width: 100%; 
+    margin-bottom: 20px; 
+  }
+}
+
+
 ::-webkit-scrollbar{
   background: linear-gradient(to top, #141414, #123613); 
   width: 10px;
