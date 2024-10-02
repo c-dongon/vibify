@@ -474,7 +474,7 @@ li{
 
 .headerbox .logo {
   background: no-repeat;
-  background-image: url("./assets/spotifylogo.png");
+  background-image: url("/assets/spotifylogo.png");
   height: 70px;
   width: 70px;
   background-size: cover;
@@ -515,7 +515,7 @@ li{
   height: 100%;
   opacity: 65%;
   z-index: -1; 
-  background-image: url("./assets/albumsgrid.png");
+  background-image: url("/assets/albumsgrid.png");
   background-repeat: repeat-x; 
   background-position: 0 0; 
   background-size: cover;
