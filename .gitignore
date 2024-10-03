@@ -26,3 +26,5 @@ venv/
 
 # to keep client secret.. a secret
 keys.env
+
+__pycache__/
