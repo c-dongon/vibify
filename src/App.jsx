@@ -44,6 +44,13 @@ function App() {
                 <div>
                     <div className="background"></div>
                     <div className="background-gradient"></div>
+                    <a href="https://github.com/c-dongon/vibify" target="_blank" rel="noopener noreferrer">
+                        <img
+                            src="/assets/githublogo.png"
+                            alt="GitHub"
+                            className="github-logo-login"
+                        />
+                    </a>
                     <div className="login-container">
                         <Header/>
                         <AuthButton/>   

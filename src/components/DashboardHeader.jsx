@@ -57,7 +57,7 @@ function DashboardHeader() {
                         alt="GitHub"
                         className="github-logo"
                     />
-                </a>
+            </a>
                 <LogoutButton />
             </div>
         </header>
