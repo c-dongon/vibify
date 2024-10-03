@@ -9,21 +9,9 @@ body{
   background: linear-gradient(to top, #141414, #545454); 
   background-repeat: no-repeat;
   background-attachment: fixed;
+  box-sizing: border-box;
+
 }
-
-@media screen and (max-width: 768px) {
-  .listening-history-sections, .recommendations-container {
-    flex-direction: column; 
-    align-items: center; 
-    width: 100%; 
-  }
-
-  .section, .search-section, .attributes-section, .playlist-section {
-    width: 90%; 
-    margin-bottom: 20px;
-  }
-}
-
 
 ::-webkit-scrollbar{
   background: linear-gradient(to top, #141414, #123613); 
@@ -46,10 +34,13 @@ body{
   border-radius: 5px;
 }
 
-.recommendations-container {
+.recommendations-container{
   padding: 20px;
   margin-top: 15px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .recommendations-container h3{
@@ -62,7 +53,7 @@ body{
   font-size: 1rem;
 }
 
-.search-section, .attributes-section, .playlist-section {
+.search-section, .attributes-section, .playlist-section{
   color: white;
   width: 30%;
   background: linear-gradient(to top,#1e1e1e, #2d2d2d); 
@@ -87,21 +78,21 @@ body{
   width: 50px;
 }
 
-.recommendations-container .search-section h4, .playlist-section h4 {
+.recommendations-container .search-section h4, .playlist-section h4{
   margin-top: 20px;
   font-size: 1.2rem;
   color: #1db954;
 }
 
 
-.recommendations-container ul {
+.recommendations-container ul{
   list-style-type: none;
   padding: 0;
   margin-left: 10px;
 
 }
 
-.recommendations-container ul li {
+.recommendations-container ul li{
   margin: 5px 0;
   cursor: pointer;
   margin-bottom: 10px;
@@ -110,13 +101,13 @@ body{
 }
 
 
-.recommendations-container ul li:hover {
+.recommendations-container ul li:hover{
   color: #1db954;
   background-color: rgba(0, 0, 0, 0.221);
   border-radius: 20px;
 }
 
-.recommendations-container input[type="text"] {
+.recommendations-container input[type="text"]{
   appearance: input;
   -webkit-appearance: none;
   width: 50%;
@@ -164,7 +155,7 @@ body{
   border: 1px solid grey;
 }
 
-.slider-labels {
+.slider-labels{
   display: flex;
   justify-content: space-between;
   color: #b3b3b3;
@@ -221,6 +212,9 @@ body{
   padding: 20px;
   margin-top: 0px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .top-header{
@@ -252,14 +246,14 @@ body{
   border: 2px solid white;
 }
 
-.listening-history-sections {
+.listening-history-sections{
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 
 }
 
-.section {
+.section{
   width: 30%;
   background: linear-gradient(to top,#111111, #252525); 
   box-shadow: 0px 0px 10px #1db954;
@@ -270,7 +264,7 @@ body{
 
 }
 
-.section h3 {
+.section h3{
   color: white;
   text-align: center;
   font-size: 1.75rem;
@@ -278,7 +272,7 @@ body{
   margin-bottom: 20px;
 }
 
-.track-item, .album-item, .artist-item {
+.track-item, .album-item, .artist-item{
   display: flex;
   align-items: center;
   margin-bottom: 15px;
@@ -337,7 +331,7 @@ li{
   border: 2px solid white;
 }
 
-.no-preview-message {
+.no-preview-message{
   position: fixed;
   top: 4%;
   right: 40%;
@@ -351,7 +345,7 @@ li{
   z-index: 10;
 }
 
-@keyframes fade-in-out {
+@keyframes fade-in-out{
   0%{
     opacity: 0; 
   }
@@ -370,7 +364,7 @@ li{
   flex-direction: column;
 }
 
-.song-title {
+.song-title{
   color: white;
   white-space: nowrap;
   overflow: hidden;
@@ -379,12 +373,12 @@ li{
   font-size: 1rem;
 }
 
-.artist-album {
+.artist-album{
   font-size: 0.9rem;
   color: #b3b3b3;
 }
 
-.login-container {
+.login-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -394,7 +388,7 @@ li{
   text-align: center;
 }
 
-.dashboard-container {
+.dashboard-container{
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -423,6 +417,7 @@ li{
   height: 40px;
   width: 40px;
   margin-left: 10px;
+  animation: fade-in 0.75s ease;
 }
 
 .github-logo{
@@ -432,6 +427,7 @@ li{
   margin-right: 10px;
   cursor: pointer;
   transition: transform 0.2s ease;
+  animation: fade-in 0.75s ease;
 }
 
 .github-logo:hover{
@@ -504,7 +500,7 @@ li{
   font-size: 4rem;
 }
 
-.headerbox .logo {
+.headerbox .logo{
   background: no-repeat;
   background-image: url("/assets/spotifylogo.png");
   height: 70px;
@@ -579,67 +575,132 @@ li{
 }
 
 @keyframes slide{
-  0% {
+  0%{
       background-position: 0 0;
   }
-  100% {
+  100%{
       background-position: -3900px 0;
   }
 }
 
 @keyframes fade-up{
-  0% {
+  0%{
     opacity: 0;
     transform: translateY(30px) scale(0.9);
   }
   
-  100% {
+  100%{
     opacity: 1;
     transform: translateY(0px) scale(1);
   }
 }
 
 @keyframes fade-in-out{
-  0% {
+  0%{
     opacity: 0;
   }
   
-  50% {
+  50%{
     opacity: 1;
   }
 
-  100% {
+  100%{
     opacity: 0;
   }
 }
 
 @keyframes fade-down{
-  0% {
+  0%{
     opacity: 0;
     transform: translateY(-30px) scale(0.9);
   }
   
-  100% {
+  100%{
     opacity: 1;
     transform: translateY(0px) scale(1);
   }
 }
 
 @keyframes fade-in{
-  0% {
+  0%{
     opacity: 0;
   }
   
-  100% {
+  100%{
     opacity: 1;
   }
 }
 
 @keyframes vignette{
-  0% {
+  0%{
       opacity: 0;
   }
-  100% {
+  100%{
       opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px){
+
+  .listening-history-sections, .recommendations-container{
+    flex-direction: column; 
+    align-items: center;
+    width: 90%; 
+  }
+
+  .section, .search-section, .attributes-section, .playlist-section{
+    width: 90%; 
+    margin-bottom: 20px;
+    margin-right: -10px;
+
+  }
+
+  .dashboard-header .dashboard-header-left h1{
+    font-size: 1rem; 
+    margin-left: 10px;
+  }
+
+  .dashboard-header .dashboard-header-left p{
+    font-size: 0.75rem; 
+    margin-left: 5px;
+  }
+
+  .dashboard-header .user-profile-img{
+    height: 25px;
+    width: 25px;
+  }
+
+  .dashboard-header .dashboard-header-right .logout-button button{
+    font-size: 0.75rem;
+    padding: 5px; 
+    width: 4rem;
+  }
+  
+  .dashboard-header .headerbox .github-logo{
+    height: 25px; 
+    width: 25px;
+  }
+  
+  .dashboard-header .headerbox .header{
+    font-size: 1rem; 
+  }
+}
+
+@media screen and (min-width: 769px){
+  .listening-history-sections{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 90%; 
+    margin: 0 auto; 
+  }
+
+  .section, .search-section, .attributes-section, .playlist-section{
+    width: 35%; 
+    margin-right: 20px;
+    margin-bottom: 0; 
+  }
+  .playlist-section{
+    margin-right: 0;
   }
 }
