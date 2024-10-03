@@ -31,7 +31,7 @@ export async function exchangeAuthorizationCodeForToken(code) {
     // console.log('Using codeVerifier:', codeVerifier);     // log code verifier
 
     // send code and verifier to flask
-    const response = await fetch('http://localhost:5000/token', {
+    const response = await fetch('https://vibify-ces8.onrender.com:5000/token', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
