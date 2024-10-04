@@ -10,7 +10,15 @@ body{
   background-repeat: no-repeat;
   background-attachment: fixed;
   box-sizing: border-box;
+}
 
+body.login-page{
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 ::-webkit-scrollbar{
@@ -665,13 +673,13 @@ li{
 }
 
 @media screen and (max-width: 768px){
+
   body, html{
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;  }
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;  }
 
   .listening-history-sections, .recommendations-container{
     flex-direction: column; 

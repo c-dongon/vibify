@@ -38,6 +38,14 @@ function AuthButton() {
         }
     }, []);
 
+    useEffect(() => {
+        if (!isAuthorized) {
+          document.body.classList.add('login-page');
+        } else {
+          document.body.classList.remove('login-page');
+        }
+      }, [isAuthorized]);
+
     return(
         <div>
             <div className="authbutton" onClick={handleLogin}>
