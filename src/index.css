@@ -5,7 +5,7 @@ body{
   height: 100%;
   overflow-y: auto;
   margin: 0;
-  font-family: 'Segoe UI', Roboto, Oxygen;
+  font-family: 'Segoe UI', Roboto, Oxygen, Helvetica, Arial, sans-serif;
   background: linear-gradient(to top, #141414, #545454); 
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -331,6 +331,17 @@ li{
   border: 2px solid white;
 }
 
+.await-server-message{
+  position: fixed;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: white;
+  text-align: center;
+  animation: fade-in 0.75s ease;
+}
+
 .no-preview-message{
   position: fixed;
   top: 4%;
@@ -653,6 +664,10 @@ li{
 }
 
 @media screen and (max-width: 768px){
+
+  body{
+    overflow: hidden;
+  }
 
   .listening-history-sections, .recommendations-container{
     flex-direction: column; 

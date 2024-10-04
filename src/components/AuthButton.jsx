@@ -3,7 +3,7 @@ import {generateCodeVerifier, generateCodeChallenge} from './AuthorizeHelpers';
 
 const CLIENT_ID = '55d70b42b28542e38aeb268736c810b6';
 const REDIRECT_URI = 'https://illustrious-dusk-9279a7.netlify.app/';
-const SCOPES = 'user-read-private user-read-email playlist-modify-public user-top-read user-read-recently-played';
+const SCOPES = 'user-read-email playlist-modify-public user-top-read';
 
 function AuthButton() {
     const [isAuthorized, setIsAuthorized] = useState(false);
@@ -39,12 +39,14 @@ function AuthButton() {
     }, []);
 
     return(
-        <div className="authbutton" onClick={handleLogin}>
-            {isAuthorized ? 
-            (<span style={{color:"white", fontSize:"1.25rem"}}>Authorization successful!</span>) 
-            : 'Login With Spotify'}
+        <div>
+            <div className="authbutton" onClick={handleLogin}>
+                {isAuthorized ? 
+                <span style={{color:"white", fontSize:"1.25rem"}}>Authorization successful!</span>
+                : 'Login With Spotify'}
+            </div>
+            {isAuthorized && (<h1 className="await-server-message">Awaiting response from server...</h1>)}
         </div>
-
     )
 }
 
