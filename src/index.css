@@ -397,6 +397,7 @@ li{
   height: calc(100vh - 100px);
   padding-top: 60px;
   text-align: center;
+  overflow: hidden;
 }
 
 .dashboard-container{
