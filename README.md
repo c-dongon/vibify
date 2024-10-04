@@ -9,7 +9,7 @@ Vibify is a web application that utilizes Spotify API to retrieve user listening
 ## Tech Stack
 
 - **Frontend**: React (hosted on Netlify)
-- **Backend**: Flask (hosted on Render)
+- **Backend**: Flask (hosted on Render, which may take a minute to process authorization)
 - **Music Data Retrieval**: Spotify API
 
 https://illustrious-dusk-9279a7.netlify.app/
