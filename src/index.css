@@ -677,9 +677,7 @@ li{
   body, html{
   height: 100%;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;  }
+  }
 
   .listening-history-sections, .recommendations-container{
     flex-direction: column; 
@@ -722,6 +720,19 @@ li{
   
   .dashboard-header .headerbox .header{
     font-size: 1rem; 
+  }
+
+  .await-server-message{
+    bottom: 10%;
+  }
+
+  .top-header h2{
+    margin: -30px;
+  }
+
+  .timeRange{
+    margin-top: 40px;
+    margin-bottom: -10px;
   }
 }
 
