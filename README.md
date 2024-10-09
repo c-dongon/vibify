@@ -1,6 +1,6 @@
 # Vibify
 
-Find your vibe and discover new music to love! Add your favorite artists, favorite songs, and tweak song attributes to fit the vibe you're looking for, then generate a personalized playlist.
+Find your vibe and discover new music to love with Vibify! Add your favorite artists, favorite songs, and tweak song attributes to fit the vibe you're looking for, then generate a personalized playlist.
 
 ## Overview
 
