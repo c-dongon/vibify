@@ -1,6 +1,6 @@
 # Vibify
 
-Find your vibe and discover new music to love! Add your favorite artists, favorite songs, and tweak song attributes to fit the vibe you're looking for, then generate a personalized playlist.
+Find your vibe and discover new music to love with Vibify! Add your favorite artists, favorite songs, and tweak song attributes to fit the vibe you're looking for, then generate a personalized playlist.
 
 ## Overview
 
@@ -9,8 +9,10 @@ Vibify is a web application that utilizes Spotify API to retrieve user listening
 ## Tech Stack
 
 - **Frontend**: React (hosted on Netlify)
-- **Backend**: Flask (hosted on Render)
+- **Backend**: Flask (hosted on Render, which may take a minute to process authorization)
 - **Music Data Retrieval**: Spotify API
 
+Currently, I must grant manual access until Spotify accepts my production request.
 https://illustrious-dusk-9279a7.netlify.app/
+
 > This is my first project!
