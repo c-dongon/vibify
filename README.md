@@ -13,6 +13,6 @@ Vibify is a web application that utilizes Spotify API to retrieve user listening
 - **Music Data Retrieval**: Spotify API
 
 Currently, I must grant manual access until Spotify accepts my production request.
-https://illustrious-dusk-9279a7.netlify.app/
+https://vibifyapp.netlify.app/
 
 > This is my first project!
