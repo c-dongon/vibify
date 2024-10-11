@@ -42,7 +42,7 @@ function DashboardHeader() {
             <div className="dashboard-header-left">
                 <div className="header">
                     <img 
-                        src="./public/assets/vibifyheader.png"
+                        src="/assets/vibifyheader.png"
                         alt="Vibify header"
                     />
                 </div>
