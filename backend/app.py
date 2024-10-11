@@ -14,8 +14,8 @@ CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 app = Flask(__name__)
 CORS(app)
 
-# REDIRECT_URI = 'https://vibifyapp.netlify.app/'
-REDIRECT_URI = 'http://localhost:5173/'
+REDIRECT_URI = 'https://vibifyapp.netlify.app/'
+# REDIRECT_URI = 'http://localhost:5173/'
 
 # route to handle the token exchange
 @app.route('/token', methods=['POST'])

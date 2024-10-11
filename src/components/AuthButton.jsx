@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {generateCodeVerifier, generateCodeChallenge} from './AuthorizeHelpers';
 
 const CLIENT_ID = '55d70b42b28542e38aeb268736c810b6';
-// const REDIRECT_URI = 'https://vibifyapp.netlify.app/';
- const REDIRECT_URI = 'http://localhost:5173/';
+    const REDIRECT_URI = 'https://vibifyapp.netlify.app/';
+// const REDIRECT_URI = 'http://localhost:5173/';
 
 const SCOPES = 'user-read-email playlist-modify-public user-top-read';
 
