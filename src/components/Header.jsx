@@ -4,7 +4,7 @@ function Header(){
     <div className = "headerbox">
         <div className = "header">
             <img 
-                src="./public/assets/vibifyheader.png"
+                src="/assets/vibifyheader.png"
                 alt="Vibify header"
             />
         </div>
