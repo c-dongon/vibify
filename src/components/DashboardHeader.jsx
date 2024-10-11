@@ -40,7 +40,12 @@ function DashboardHeader() {
     return (
         <header className="dashboard-header">
             <div className="dashboard-header-left">
-                <h1>Vibify</h1>
+                <div className="header">
+                    <img 
+                        src="./public/assets/vibifyheader.png"
+                        alt="Vibify header"
+                    />
+                </div>
                 <p>Hello, {userName}!</p>
                 {userImage && (
                     <img 
